@@ -6,7 +6,7 @@ export default function Dashboard(props, users) {
     // const allUsers = async () => {
     //     return await props.users;
     // };
-    console.log(props.users);
+    // console.log(props.users);
     return (
         <AuthenticatedLayout
             auth={props.auth}

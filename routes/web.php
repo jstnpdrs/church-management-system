@@ -32,4 +32,12 @@ Route::get('/dashboard', function () {
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/baptism', function () {
+    return Inertia::render('Baptism');
+})->middleware(['auth', 'verified'])->name('baptism');
+
+Route::get('/confirmation', function () {
+    return Inertia::render('Confirmation');
+})->middleware(['auth', 'verified'])->name('confirmation');
+
 require __DIR__.'/auth.php';

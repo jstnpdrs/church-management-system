@@ -25,29 +25,35 @@ export default function Authenticated({ auth, header, children }) {
                                     href={route("dashboard")}
                                     active={route().current("dashboard")}
                                 >
+                                    Dashboard
+                                </NavLink>
+                                <NavLink
+                                    href={route("baptism")}
+                                    active={route().current("baptism")}
+                                >
                                     Baptism
                                 </NavLink>
                                 <NavLink
-                                    href={route("dashboard")}
-                                    active={route().current("dashboard")}
+                                    href={route("confirmation")}
+                                    active={route().current("confirmation")}
                                 >
                                     Confirmation
                                 </NavLink>
                                 <NavLink
                                     href={route("dashboard")}
-                                    active={route().current("dashboard")}
+                                    active={false}
                                 >
                                     Death Certificate
                                 </NavLink>
                                 <NavLink
                                     href={route("dashboard")}
-                                    active={route().current("dashboard")}
+                                    active={false}
                                 >
                                     Marriage Certificate
                                 </NavLink>
                                 <NavLink
                                     href={route("dashboard")}
-                                    active={route().current("dashboard")}
+                                    active={false}
                                 >
                                     Pledge
                                 </NavLink>
@@ -148,29 +154,40 @@ export default function Authenticated({ auth, header, children }) {
                             href={route("dashboard")}
                             active={route().current("dashboard")}
                         >
+                            Dashboard
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink
+                            href={route("baptism")}
+                            active={route().current("baptism")}
+                        >
                             Baptism
                         </ResponsiveNavLink>
+
                         <ResponsiveNavLink
-                            href={route("dashboard")}
-                            active={route().current("dashboard")}
+                            href={route("confirmation")}
+                            active={route().current("confirmation")}
                         >
                             Confirmation
                         </ResponsiveNavLink>
+
                         <ResponsiveNavLink
                             href={route("dashboard")}
-                            active={route().current("dashboard")}
+                            active={false}
                         >
                             Death Certificate
                         </ResponsiveNavLink>
+
                         <ResponsiveNavLink
                             href={route("dashboard")}
-                            active={route().current("dashboard")}
+                            active={false}
                         >
                             Marriage Certificate
                         </ResponsiveNavLink>
+
                         <ResponsiveNavLink
                             href={route("dashboard")}
-                            active={route().current("dashboard")}
+                            active={false}
                         >
                             Pledge
                         </ResponsiveNavLink>
@@ -200,7 +217,7 @@ export default function Authenticated({ auth, header, children }) {
             </nav>
 
             {header && (
-                <header className="bg-white shadow">
+                <header className="bg-white shadow sm:hidden">
                     <div className="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
                         {header}
                     </div>
