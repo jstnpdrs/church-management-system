@@ -1,12 +1,89 @@
 import React from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/inertia-react";
+import DataTable from "react-data-table-component";
+import { Link } from "@inertiajs/inertia-react";
+import axios from "axios";
 
-export default function Dashboard(props, users) {
+export default function Baptism(props) {
     // const allUsers = async () => {
     //     return await props.users;
     // };
-    // console.log(props.users);
+    // console.log(props);
+    const handleSubmit = () => {
+        const formData = {
+            name: "asdasd",
+        };
+        axios
+            .post(route("baptism.store", formData))
+            .then((res) => console.log(res.data));
+    };
+    const columns = [
+        {
+            name: "ID",
+            selector: (row) => row.id,
+            sortable: true,
+            width: "70px",
+        },
+        {
+            name: "Name",
+            selector: (row) => row.name,
+            sortable: true,
+        },
+        {
+            name: "Birthday",
+            selector: (row) => row.birthday,
+            sortable: true,
+        },
+        {
+            name: "Place of Birth",
+            selector: (row) => row.pob,
+            sortable: true,
+        },
+        {
+            name: "Date of Confirmation",
+            selector: (row) => row.confirmationDate,
+            sortable: true,
+        },
+    ];
+    const data = [
+        {
+            id: 1,
+            name: "Athena Ellyse Matorre Pedrosa",
+            birthday: "February 24, 2020",
+            pob: "DRSTMH, Kalibo, Aklan",
+            father: "Justine Pedrosa",
+            mother: "Gerielyn Matorre",
+            confirmationDate: "February 24, 2021",
+            godparents: "",
+            sponsors: "",
+            minister: "",
+        },
+        {
+            id: 2,
+            name: "Athena Ellyse Matorre Pedrosa",
+            birthday: "February 24, 2020",
+            pob: "DRSTMH, Kalibo, Aklan",
+            father: "Justine Pedrosa",
+            mother: "Gerielyn Matorre",
+            confirmationDate: "February 24, 2021",
+            godparents: "",
+            sponsors: "",
+            minister: "",
+        },
+        {
+            id: 3,
+            name: "Athena Ellyse Matorre Pedrosa",
+            birthday: "February 24, 2020",
+            pob: "DRSTMH, Kalibo, Aklan",
+            father: "Justine Pedrosa",
+            mother: "Gerielyn Matorre",
+            confirmationDate: "February 24, 2021",
+            godparents: "",
+            sponsors: "",
+            minister: "",
+        },
+    ];
     return (
         <AuthenticatedLayout
             auth={props.auth}
@@ -29,9 +106,14 @@ export default function Dashboard(props, users) {
                             onChange={(e) => console.log(e.target.value)}
                             defaultValue={"2022-10"}
                         />
-                        <button className="px-4 py-2 text-white bg-slate-700">
+                        {/* <Link href={route("baptism.create")}> */}
+                        <button
+                            onClick={handleSubmit}
+                            className="px-4 py-2 text-white bg-slate-700"
+                        >
                             + Add
                         </button>
+                        {/* </Link> */}
                     </div>
                     {/* <div className="grid w-full grid-cols-3 p-4 mb-2 text-lg font-bold text-gray-500 bg-white rounded shadow">
                         <p>Name</p>
@@ -44,48 +126,16 @@ export default function Dashboard(props, users) {
                         <p>October 20, 2022</p>
                     </div> */}
                     <div className="w-full p-4 bg-white">
-                        <table className="w-full">
-                            <thead className="border-b border-gray-400">
-                                <tr>
-                                    <th className="pb-2 text-left">Name</th>
-                                    <th className="pb-2 text-left">Address</th>
-                                    <th className="pb-2 text-left">Date</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr className="py-3 my-3 border-b border-gray-200">
-                                    <td>Justine Pedrosa</td>
-                                    <td>Dongon East, Numancia, Aklan</td>
-                                    <td>October 20, 2022</td>
-                                    <td className="flex space-x-4">
-                                        <div className="w-6 h-6 bg-blue-500 rounded-full"></div>
-                                        <div className="w-6 h-6 bg-green-500 rounded-full"></div>
-                                        <div className="w-6 h-6 bg-red-500 rounded-full"></div>
-                                    </td>
-                                </tr>
-                                <tr className="py-3 my-3 border-b border-gray-200">
-                                    <td>Justine Pedrosa</td>
-                                    <td>Dongon East, Numancia, Aklan</td>
-                                    <td>October 20, 2022</td>
-                                    <td className="flex space-x-4">
-                                        <div className="w-6 h-6 bg-blue-500 rounded-full"></div>
-                                        <div className="w-6 h-6 bg-green-500 rounded-full"></div>
-                                        <div className="w-6 h-6 bg-red-500 rounded-full"></div>
-                                    </td>
-                                </tr>
-                                <tr className="py-3 my-3 border-b border-gray-200">
-                                    <td>Justine Pedrosa</td>
-                                    <td>Dongon East, Numancia, Aklan</td>
-                                    <td>October 20, 2022</td>
-                                    <td className="flex space-x-4">
-                                        <div className="w-6 h-6 bg-blue-500 rounded-full"></div>
-                                        <div className="w-6 h-6 bg-green-500 rounded-full"></div>
-                                        <div className="w-6 h-6 bg-red-500 rounded-full"></div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <DataTable
+                            title="Register of Baptism"
+                            columns={columns}
+                            data={data}
+                            responsive
+                            pagination
+                            fixedHeader
+                            pointerOnHover
+                            highlightOnHover
+                        />
                     </div>
                 </div>
             </div>

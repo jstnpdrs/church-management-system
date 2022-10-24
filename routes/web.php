@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BaptismController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -31,10 +32,10 @@ Route::get('/dashboard', function () {
         // 'users' => Auth::user()
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::get('/baptism', function () {
-    return Inertia::render('Baptism');
-})->middleware(['auth', 'verified'])->name('baptism');
+Route::resource('baptism', BaptismController::class)->middleware(['auth', 'verified']);
+// Route::get('/baptism', function () {
+//     return Inertia::render('Baptism');
+// })->middleware(['auth', 'verified'])->name('baptism');
 
 Route::get('/confirmation', function () {
     return Inertia::render('Confirmation');

@@ -1,12 +1,44 @@
 import React from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/inertia-react";
+import DataTable from "react-data-table-component";
 
 export default function Dashboard(props, users) {
     // const allUsers = async () => {
     //     return await props.users;
     // };
     // console.log(props.users);
+    const columns = [
+        {
+            name: "ID",
+            selector: (row) => row.id,
+            sortable: true,
+        },
+        {
+            name: "Name",
+            selector: (row) => row.name,
+            sortable: true,
+        },
+        {
+            name: "",
+            selector: (row) => {
+                return (
+                    <>
+                        <button className="font-bold bg-red-200">
+                            delete{row.id}
+                        </button>
+                        ;
+                        <button className="font-bold bg-red-200">delete</button>
+                        ;
+                        <button className="font-bold bg-red-200">delete</button>
+                        ;
+                        <button className="font-bold bg-red-200">delete</button>
+                        ;
+                    </>
+                );
+            },
+        },
+    ];
     return (
         <AuthenticatedLayout
             auth={props.auth}
@@ -22,7 +54,7 @@ export default function Dashboard(props, users) {
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                        {props.users.map((user) => {
+                        {/* {props.users.map((user) => {
                             return (
                                 <div
                                     key={user.id}
@@ -31,7 +63,16 @@ export default function Dashboard(props, users) {
                                     Welcome {user.name}!
                                 </div>
                             );
-                        })}
+                        })} */}
+                        <DataTable
+                            columns={columns}
+                            data={props.users}
+                            pagination
+                            fixedHeader
+                            title="Users"
+                            pointerOnHover
+                            responsive
+                        />
                     </div>
                     {/* <div className="bg-white shadow-sm sm:rounded-lg">
                         <p>{JSON.stringify(props.users)}</p>
