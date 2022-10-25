@@ -41,7 +41,27 @@ export default function Baptism(props) {
             sortable: true,
         },
         {
-            name: "Date of Confirmation",
+            name: "Parents",
+            cell: () => "parents data",
+            sortable: true,
+        },
+        {
+            name: "Legitimitas",
+            cell: () => "Legitimate",
+            sortable: true,
+        },
+        {
+            name: "Godparents",
+            cell: () => "godparents data",
+            sortable: true,
+        },
+        {
+            name: "Sponsors",
+            cell: () => "sponsors data",
+            sortable: true,
+        },
+        {
+            name: "Date of Baptism",
             selector: (row) => row.confirmationDate,
             sortable: true,
         },

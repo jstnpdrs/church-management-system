@@ -1,12 +1,99 @@
 import React from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/inertia-react";
+import DataTable from "react-data-table-component";
 
 export default function Dashboard(props, users) {
     // const allUsers = async () => {
     //     return await props.users;
     // };
     // console.log(props.users);
+    const columns = [
+        {
+            name: "ID",
+            selector: (row) => row.id,
+            sortable: true,
+            width: "70px",
+        },
+        {
+            name: "Name",
+            selector: (row) => row.name,
+            sortable: true,
+        },
+        {
+            name: "Birthday",
+            selector: (row) => row.birthday,
+            sortable: true,
+        },
+        {
+            name: "Place of Birth",
+            selector: (row) => row.pob,
+            sortable: true,
+        },
+        {
+            name: "Parents",
+            cell: () => "parents data",
+            sortable: true,
+        },
+        {
+            name: "Legitimitas",
+            cell: () => "Legitimate",
+            sortable: true,
+        },
+        {
+            name: "Godparents",
+            cell: () => "godparents data",
+            sortable: true,
+        },
+        {
+            name: "Sponsors",
+            cell: () => "sponsors data",
+            sortable: true,
+        },
+        {
+            name: "Date of Confirmation",
+            selector: (row) => row.confirmationDate,
+            sortable: true,
+        },
+    ];
+    const data = [
+        {
+            id: 1,
+            name: "Athena Ellyse Matorre Pedrosa",
+            birthday: "February 24, 2020",
+            pob: "DRSTMH, Kalibo, Aklan",
+            father: "Justine Pedrosa",
+            mother: "Gerielyn Matorre",
+            confirmationDate: "February 24, 2021",
+            godparents: "",
+            sponsors: "",
+            minister: "",
+        },
+        {
+            id: 2,
+            name: "Athena Ellyse Matorre Pedrosa",
+            birthday: "February 24, 2020",
+            pob: "DRSTMH, Kalibo, Aklan",
+            father: "Justine Pedrosa",
+            mother: "Gerielyn Matorre",
+            confirmationDate: "February 24, 2021",
+            godparents: "",
+            sponsors: "",
+            minister: "",
+        },
+        {
+            id: 3,
+            name: "Athena Ellyse Matorre Pedrosa",
+            birthday: "February 24, 2020",
+            pob: "DRSTMH, Kalibo, Aklan",
+            father: "Justine Pedrosa",
+            mother: "Gerielyn Matorre",
+            confirmationDate: "February 24, 2021",
+            godparents: "",
+            sponsors: "",
+            minister: "",
+        },
+    ];
     return (
         <AuthenticatedLayout
             auth={props.auth}
@@ -38,15 +125,17 @@ export default function Dashboard(props, users) {
                             + Add
                         </button>
                     </div>
-                    <div className="grid w-full grid-cols-3 p-4 mb-2 text-lg font-bold text-gray-500 bg-white rounded shadow">
-                        <p>Name</p>
-                        <p>Address</p>
-                        <p>Date</p>
-                    </div>
-                    <div className="grid w-full grid-cols-3 p-4 mb-2 bg-white rounded shadow hover:bg-gray-200 hover:cursor-pointer">
-                        <p>Justine</p>
-                        <p>Dongon East, Numancia, Aklan</p>
-                        <p>October 20, 2022</p>
+                    <div className="w-full p-4 bg-white">
+                        <DataTable
+                            title="Register of Confirmation"
+                            columns={columns}
+                            data={data}
+                            responsive
+                            pagination
+                            fixedHeader
+                            pointerOnHover
+                            highlightOnHover
+                        />
                     </div>
                 </div>
             </div>

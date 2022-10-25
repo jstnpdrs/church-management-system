@@ -23,18 +23,18 @@ export default function Dashboard(props, users) {
             name: "",
             selector: (row) => {
                 return (
-                    <>
-                        <button className="font-bold bg-red-200">
-                            delete{row.id}
+                    <div className="space-x-4 ">
+                        <button className="p-2 font-bold bg-green-200 rounded-md w-14">
+                            view
+                            {/* delete{row.id} */}
                         </button>
-                        ;
-                        <button className="font-bold bg-red-200">delete</button>
-                        ;
-                        <button className="font-bold bg-red-200">delete</button>
-                        ;
-                        <button className="font-bold bg-red-200">delete</button>
-                        ;
-                    </>
+                        <button className="p-2 font-bold bg-blue-200 rounded-md w-14">
+                            edit
+                        </button>
+                        <button className="p-2 font-bold bg-red-200 rounded-md w-14">
+                            delete
+                        </button>
+                    </div>
                 );
             },
         },
