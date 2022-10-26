@@ -1,23 +1,20 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/inertia-react";
 import DataTable from "react-data-table-component";
-import { Link } from "@inertiajs/inertia-react";
 import axios from "axios";
+import Modal from "@/Components/Modal";
 
-export default function Baptism(props) {
-    // const allUsers = async () => {
-    //     return await props.users;
-    // };
-    // console.log(props);
-    const handleSubmit = () => {
-        const formData = {
-            name: "asdasd",
-        };
-        axios
-            .post(route("baptism.store", formData))
-            .then((res) => console.log(res.data));
-    };
+export default function Baptism({ baptisms, auth, errors }) {
+    // export default function Baptism(props, baptisms) {
+    const [modalVisible, setModalVisible] = useState(false);
+    const [formData, setFormData] = useState({
+        name: "",
+    });
+    useEffect(() => {
+        console.log(baptisms);
+    }, []);
+
     const columns = [
         {
             name: "ID",
@@ -104,10 +101,36 @@ export default function Baptism(props) {
             minister: "",
         },
     ];
+    // const allUsers = async () => {
+    //     return await users;
+    // };
+    // console.log(props);
+    async function handleSubmit(e) {
+        e.preventDefault();
+        await axios.post("baptism", formData).then((res) => {
+            console.log(res.data);
+
+            return res;
+        });
+    }
+    function handleOnchange(e) {
+        setFormData((prev) => ({
+            ...prev,
+            [e.target.name]: e.target.value,
+        }));
+    }
+
+    function modalClose() {
+        setModalVisible(false);
+    }
+    function modalOpen() {
+        setModalVisible(true);
+    }
+
     return (
         <AuthenticatedLayout
-            auth={props.auth}
-            errors={props.errors}
+            auth={auth}
+            errors={errors}
             header={
                 <h2 className="text-xl font-semibold leading-tight text-gray-800">
                     Baptism
@@ -128,7 +151,7 @@ export default function Baptism(props) {
                         />
                         {/* <Link href={route("baptism.create")}> */}
                         <button
-                            onClick={handleSubmit}
+                            onClick={modalOpen}
                             className="px-4 py-2 text-white bg-slate-700"
                         >
                             + Add
@@ -159,6 +182,26 @@ export default function Baptism(props) {
                     </div>
                 </div>
             </div>
+            <Modal
+                modalVisible={modalVisible}
+                modalClose={modalClose}
+                fullscreen={false}
+            >
+                <div className="p-5">
+                    <h1>Modal Title</h1>
+                    <form onSubmit={handleSubmit}>
+                        <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            value={formData.name}
+                            onChange={handleOnchange}
+                        />
+                        <p>{formData.name ?? ""}</p>
+                        <button type="submit">Save</button>
+                    </form>
+                </div>
+            </Modal>
         </AuthenticatedLayout>
     );
 }

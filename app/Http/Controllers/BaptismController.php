@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Baptism;
 use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class BaptismController extends Controller
 {
@@ -15,8 +17,9 @@ class BaptismController extends Controller
      */
     public function index()
     {
+        // $baptisms = Baptism::all();
         return Inertia::render('Baptism',[
-            'users'=> User::all()
+            'baptisms'=>Baptism::all()
         ]);
     }
 
@@ -38,7 +41,8 @@ class BaptismController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        Baptism::create($request->all());
+        return Baptism::all();
     }
 
     /**

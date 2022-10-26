@@ -20,6 +20,11 @@ export default function Dashboard(props, users) {
             sortable: true,
         },
         {
+            name: "Email",
+            selector: (row) => row.email,
+            sortable: true,
+        },
+        {
             name: "",
             selector: (row) => {
                 return (

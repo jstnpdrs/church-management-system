@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('baptisms', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->date('birthday');
-            $table->string('pob');
-            $table->boolean('legitimitas');
-            $table->date('dop');
+            $table->string('name')->nullable();
+            $table->date('birthday')->nullable();
+            $table->string('pob')->nullable();
+            $table->boolean('legitimitas')->nullable();
+            $table->date('dop')->nullable();
             // $table->foreignId('parents_id');
             // $table->foreignId('sponsors_id');
             // $table->foreignId('godparents_id');
