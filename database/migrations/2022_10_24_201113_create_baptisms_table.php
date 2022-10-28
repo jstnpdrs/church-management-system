@@ -18,8 +18,14 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->date('birthday')->nullable();
             $table->string('pob')->nullable();
-            $table->boolean('legitimitas')->nullable();
-            $table->date('dop')->nullable();
+            $table->date('dob')->nullable();
+            $table->longText('parents')->nullable();
+            $table->string('legitimitas')->nullable();
+            $table->longText('godparents')->nullable();
+            $table->longText('sponsors')->nullable();
+            $table->date('baptism-date')->nullable();
+            $table->string('minister')->nullable();
+            // $table->boolean('legitimitas')->nullable();
             // $table->foreignId('parents_id');
             // $table->foreignId('sponsors_id');
             // $table->foreignId('godparents_id');

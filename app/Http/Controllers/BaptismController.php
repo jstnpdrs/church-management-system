@@ -42,7 +42,9 @@ class BaptismController extends Controller
     public function store(Request $request)
     {
         Baptism::create($request->all());
-        return Baptism::all();
+        return inertia('Baptism',[
+            'baptisms'=>Baptism::all()
+        ]);
     }
 
     /**
