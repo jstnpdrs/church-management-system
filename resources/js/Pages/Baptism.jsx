@@ -239,7 +239,7 @@ export default function Baptism(props) {
                             onClick={modalOpen}
                             className="px-4 py-2 text-white bg-slate-700"
                         >
-                            + Add XXXX
+                            + Add
                         </button>
                         {/* </Link> */}
                     </div>
