@@ -2,7 +2,8 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "fetch": "git pull https://github.com/jstnpdrs/church-management-system.git"
     },
     "devDependencies": {
         "@headlessui/react": "^1.4.2",
