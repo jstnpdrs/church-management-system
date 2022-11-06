@@ -29,7 +29,7 @@ export default function Authenticated({ auth, header, children }) {
                                     href={route("dashboard")}
                                     active={route().current("dashboard")}
                                 >
-                                    Dashboard
+                                    Home
                                 </NavLink>
                                 <NavLink
                                     href={route("baptism.index")}
@@ -158,7 +158,7 @@ export default function Authenticated({ auth, header, children }) {
                             href={route("dashboard")}
                             active={route().current("dashboard")}
                         >
-                            Dashboard
+                            Home
                         </ResponsiveNavLink>
 
                         <ResponsiveNavLink
