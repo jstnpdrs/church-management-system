@@ -56,6 +56,9 @@ class BaptismController extends Controller
     public function show($id)
     {
         //
+        return Inertia::render('BaptismShow',[
+            'baptism'=>Baptism::where('id',$id)->first()
+        ]);
     }
 
     /**

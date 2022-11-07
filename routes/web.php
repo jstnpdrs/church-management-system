@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use app\Models\User;
+use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,19 +19,22 @@ use app\Models\User;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    // return Inertia::render('Welcome', [
+    //     'canLogin' => Route::has('login'),
+    //     'canRegister' => Route::has('register'),
+    //     'laravelVersion' => Application::VERSION,
+    //     'phpVersion' => PHP_VERSION,
+    // ]);
+   return Redirect::route('baptism.index');
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard',[
-        'users' => User::all(),
-        // 'users' => Auth::user()
-    ]);
+    // return Inertia::render('Dashboard',[
+    //     'users' => User::all(),
+    //     // 'users' => Auth::user()
+    // ]);
+   return Redirect::route('baptism.index');
+
 })->middleware(['auth', 'verified'])->name('dashboard');
 Route::resource('baptism', BaptismController::class)->middleware(['auth', 'verified']);
 // Route::get('/baptism', function () {

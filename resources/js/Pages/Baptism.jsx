@@ -136,7 +136,8 @@ export default function Baptism(props) {
         e.preventDefault();
         Inertia.post("baptism", formData, {
             onSuccess: (res) => {
-                setBaptisms(res.props.baptisms);
+                // setBaptisms(res.props.baptisms);
+                Inertia.visit("/baptism");
                 reset();
                 modalClose();
                 toast.success("Record added");
@@ -171,6 +172,7 @@ export default function Baptism(props) {
                                 name="yearFilter"
                                 id="yearFilter"
                                 onChange={onFilterChange}
+                                defaultValue={new Date().getFullYear()}
                             >
                                 <option
                                     key="default"
@@ -237,6 +239,7 @@ export default function Baptism(props) {
                         {/* <Link href={route("baptism.create")}> */}
                         <button
                             onClick={modalOpen}
+                            // onClick={() => Inertia.visit("/baptism")}
                             className="px-4 py-2 text-white bg-slate-700"
                         >
                             + Add
@@ -255,8 +258,9 @@ export default function Baptism(props) {
                             highlightOnHover
                             on
                             // defaultSortAsc={false}
-                            onRowClicked={(row) =>
-                                toast.success(row.name + " clicked!")
+                            onRowClicked={
+                                (row) => Inertia.visit(`baptism/${+row.id}`)
+                                // toast.success(row.name + " clicked!")
                             }
                         />
                     </div>

@@ -25,15 +25,18 @@ export default function Authenticated({ auth, header, children }) {
                             </div>
 
                             <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink
+                                {/* <NavLink
                                     href={route("dashboard")}
                                     active={route().current("dashboard")}
                                 >
                                     Home
-                                </NavLink>
+                                </NavLink> */}
                                 <NavLink
                                     href={route("baptism.index")}
-                                    active={route().current("baptism.index")}
+                                    active={
+                                        route().current("baptism.index") ||
+                                        route().current("baptism.show")
+                                    }
                                 >
                                     Baptism
                                 </NavLink>
@@ -154,16 +157,19 @@ export default function Authenticated({ auth, header, children }) {
                     }
                 >
                     <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink
+                        {/* <ResponsiveNavLink
                             href={route("dashboard")}
                             active={route().current("dashboard")}
                         >
                             Home
-                        </ResponsiveNavLink>
+                        </ResponsiveNavLink> */}
 
                         <ResponsiveNavLink
                             href={route("baptism.index")}
-                            active={route().current("baptism.index")}
+                            active={
+                                route().current("baptism.index") ||
+                                route().current("baptism.show")
+                            }
                         >
                             Baptism
                         </ResponsiveNavLink>

@@ -7,7 +7,6 @@ export default function Dashboard(props) {
     // const allUsers = async () => {
     //     return await props.users;
     // };
-    console.log(props);
     const columns = [
         {
             name: "ID",
