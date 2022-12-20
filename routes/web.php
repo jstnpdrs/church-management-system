@@ -1,10 +1,8 @@
 <?php
 
 use App\Http\Controllers\BaptismController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use app\Models\User;
 use Illuminate\Support\Facades\Redirect;
 
 /*
@@ -19,30 +17,19 @@ use Illuminate\Support\Facades\Redirect;
 */
 
 Route::get('/', function () {
-    // return Inertia::render('Welcome', [
-    //     'canLogin' => Route::has('login'),
-    //     'canRegister' => Route::has('register'),
-    //     'laravelVersion' => Application::VERSION,
-    //     'phpVersion' => PHP_VERSION,
-    // ]);
    return Redirect::route('baptism.index');
 });
 
 Route::get('/dashboard', function () {
-    // return Inertia::render('Dashboard',[
-    //     'users' => User::all(),
-    //     // 'users' => Auth::user()
-    // ]);
    return Redirect::route('baptism.index');
-
 })->middleware(['auth', 'verified'])->name('dashboard');
 Route::resource('baptism', BaptismController::class)->middleware(['auth', 'verified']);
-// Route::get('/baptism', function () {
-//     return Inertia::render('Baptism');
-// })->middleware(['auth', 'verified'])->name('baptism');
-
 Route::get('/confirmation', function () {
     return Inertia::render('Confirmation');
 })->middleware(['auth', 'verified'])->name('confirmation');
-
+Route::get('/create-user', function () {
+    return Inertia::render('Auth/Register');
+    // return Inertia::render('Register');
+})->middleware(['auth', 'verified'])->name('create-user');
+Route::get('/register', [RegisteredUserController::class,'create'])->middleware(['auth', 'verified'])->name('register');
 require __DIR__.'/auth.php';

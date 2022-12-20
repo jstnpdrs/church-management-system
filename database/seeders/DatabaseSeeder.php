@@ -18,10 +18,11 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
+            'role' => 'admin',
             'password' => Hash::make('admin')
         ]);
 
-        \App\Models\User::factory(100)->create();
+        // \App\Models\User::factory(100)->create();
 
     }
 }

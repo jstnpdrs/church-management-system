@@ -1,33 +1,39 @@
-import React, { useEffect } from 'react';
-import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/inertia-react';
+import React, { useEffect } from "react";
+import GuestLayout from "@/Layouts/GuestLayout";
+import InputError from "@/Components/InputError";
+import InputLabel from "@/Components/InputLabel";
+import PrimaryButton from "@/Components/PrimaryButton";
+import TextInput from "@/Components/TextInput";
+import { Head, Link, useForm } from "@inertiajs/inertia-react";
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: '',
+        name: "",
+        email: "",
+        password: "",
+        password_confirmation: "",
+        role: "admin",
     });
 
     useEffect(() => {
         return () => {
-            reset('password', 'password_confirmation');
+            reset("password", "password_confirmation");
         };
     }, []);
 
     const onHandleChange = (event) => {
-        setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
+        setData(
+            event.target.name,
+            event.target.type === "checkbox"
+                ? event.target.checked
+                : event.target.value
+        );
     };
 
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('register'));
+        post(route("register"));
     };
 
     return (
@@ -42,7 +48,7 @@ export default function Register() {
                         type="text"
                         name="name"
                         value={data.name}
-                        className="mt-1 block w-full"
+                        className="block w-full mt-1"
                         autoComplete="name"
                         isFocused={true}
                         handleChange={onHandleChange}
@@ -59,7 +65,7 @@ export default function Register() {
                         type="email"
                         name="email"
                         value={data.email}
-                        className="mt-1 block w-full"
+                        className="block w-full mt-1"
                         autoComplete="username"
                         handleChange={onHandleChange}
                         required
@@ -69,13 +75,31 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
+                    <InputLabel forInput="role" value="Role" />
+                    <select
+                        className="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                        name="role"
+                        id="role"
+                        value={data.role}
+                        onChange={onHandleChange}
+                        required
+                    >
+                        <option value="admin">Admin</option>
+                        <option value="secretary">Secretary</option>
+                        <option value="staff">Staff</option>
+                    </select>
+
+                    <InputError message={errors.role} className="mt-2" />
+                </div>
+
+                <div className="mt-4">
                     <InputLabel forInput="password" value="Password" />
 
                     <TextInput
                         type="password"
                         name="password"
                         value={data.password}
-                        className="mt-1 block w-full"
+                        className="block w-full mt-1"
                         autoComplete="new-password"
                         handleChange={onHandleChange}
                         required
@@ -85,24 +109,30 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel forInput="password_confirmation" value="Confirm Password" />
+                    <InputLabel
+                        forInput="password_confirmation"
+                        value="Confirm Password"
+                    />
 
                     <TextInput
                         type="password"
                         name="password_confirmation"
                         value={data.password_confirmation}
-                        className="mt-1 block w-full"
+                        className="block w-full mt-1"
                         handleChange={onHandleChange}
                         required
                     />
 
-                    <InputError message={errors.password_confirmation} className="mt-2" />
+                    <InputError
+                        message={errors.password_confirmation}
+                        className="mt-2"
+                    />
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
-                    <Link href={route('login')} className="underline text-sm text-gray-600 hover:text-gray-900">
+                    {/* <Link href={route('login')} className="text-sm text-gray-600 underline hover:text-gray-900">
                         Already registered?
-                    </Link>
+                    </Link> */}
 
                     <PrimaryButton className="ml-4" processing={processing}>
                         Register

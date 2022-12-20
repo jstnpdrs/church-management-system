@@ -29,6 +29,11 @@ export default function Baptism(props) {
         "November",
         "December",
     ];
+    const years = props.baptisms
+        .map((b) => new Date(b["baptism-date"]).getFullYear())
+        .sort(function (a, b) {
+            return b - a;
+        });
 
     const {
         data: formData,
@@ -49,9 +54,22 @@ export default function Baptism(props) {
         monthFilter: "",
         yearFilter: "",
     });
-    useEffect(() => {
-        console.log(filters);
-    }, [filters]);
+    // useEffect(() => {
+    //     // new Date(
+    //     //     props?.baptisms?.map((b) =>
+    //     //         console.log(
+    //     //             new Date(b["baptism-date"]).getFullYear() ===
+    //     //                 parseInt(filters.yearFilter)
+    //     //         )
+    //     //     )
+    //     // );
+    //     console.log(
+    //         props.baptisms.map((b) => new Date(b["baptism-date"]).getFullYear())
+    //     );
+    // }, [filters]);
+    // useEffect(() => {
+    //     console.log(props);
+    // }, []);
 
     function onFilterChange(e) {
         setFilters((prev) => ({
@@ -60,12 +78,62 @@ export default function Baptism(props) {
         }));
     }
     const [baptisms, setBaptisms] = useState(props.baptisms);
+
+    // const filterMethods = [
+    //     (item) =>
+    //         filters.monthFilter
+    //             ? months[new Date(item["baptism-date"]).getMonth()] ===
+    //               filters.monthFilter
+    //             : false,
+    //     (item) =>
+    //         filters.yearFilter
+    //             ? new Date(item["baptism-date"]).getFullYear() ===
+    //               parseInt(filters.yearFilter)
+    //             : false,
+
+    //     // (item) => item.discounts.length > 0,
+    //     // (item) =>
+    //     //     item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) != -1,
+    // ];
+
     const filteredData = baptisms.filter((baptism) => {
+        if (filters.monthFilter && filters.yearFilter) {
+            return (
+                months[new Date(baptism["baptism-date"]).getMonth()] ===
+                    filters.monthFilter &&
+                new Date(baptism["baptism-date"]).getFullYear() ===
+                    parseInt(filters.yearFilter)
+            );
+        }
+        if (!filters.monthFilter && !filters.yearFilter) {
+            return true;
+        }
         return (
             months[new Date(baptism["baptism-date"]).getMonth()] ===
-            filters.monthFilter
+                filters.monthFilter ||
+            new Date(baptism["baptism-date"]).getFullYear() ===
+                parseInt(filters.yearFilter)
         );
     });
+    // const filteredData = () => {
+    //     const data = baptisms;
+    //     // data = filters.monthFilter
+    //     //     ? baptisms?.filter(
+    //     //           (b) =>
+    //     //               months[new Date(item["baptism-date"]).getMonth()] ===
+    //     //               filters.monthFilter
+    //     //       )
+    //     //     : data;
+    //     // data = filters.yearFilter
+    //     //     ? baptisms?.filter(
+    //     //           (b) =>
+    //     //               new Date(item["baptism-date"]).getFullYear() ===
+    //     //               parseInt(filters.yearFilter)
+    //     //       )
+    //     //     : data;
+
+    //     return data;
+    // };
     const columns = [
         {
             name: "No.",
@@ -96,7 +164,7 @@ export default function Baptism(props) {
         },
         {
             name: "Parents",
-            selector: (row) => <pre>{row.parents}</pre>,
+            selector: (row) => <pre className="font-sans">{row.parents}</pre>,
             sortable: true,
         },
         {
@@ -138,6 +206,7 @@ export default function Baptism(props) {
             onSuccess: (res) => {
                 // setBaptisms(res.props.baptisms);
                 Inertia.visit("/baptism");
+                // Inertia.reload({ only: ["baptisms"] });
                 reset();
                 modalClose();
                 toast.success("Record added");
@@ -172,9 +241,25 @@ export default function Baptism(props) {
                                 name="yearFilter"
                                 id="yearFilter"
                                 onChange={onFilterChange}
-                                defaultValue={new Date().getFullYear()}
+                                // defaultValue={new Date().getFullYear()}
                             >
                                 <option
+                                    key="default"
+                                    value=""
+                                    className="p-5 m-4"
+                                >
+                                    Select Year
+                                </option>
+                                {years?.map((year) => (
+                                    <option
+                                        key={year}
+                                        value={year}
+                                        className="h-12"
+                                    >
+                                        {year}
+                                    </option>
+                                ))}
+                                {/* <option
                                     key="default"
                                     value=""
                                     className="p-5 m-4"
@@ -208,7 +293,7 @@ export default function Baptism(props) {
                                     className="h-12"
                                 >
                                     2019
-                                </option>
+                                </option> */}
                             </select>
                             <select
                                 name="monthFilter"
@@ -250,13 +335,12 @@ export default function Baptism(props) {
                         <DataTable
                             title="Register of Baptism"
                             columns={columns}
-                            data={baptisms}
+                            data={filteredData}
                             responsive
                             pagination
                             fixedHeader
                             pointerOnHover
                             highlightOnHover
-                            on
                             // defaultSortAsc={false}
                             onRowClicked={
                                 (row) => Inertia.visit(`baptism/${+row.id}`)

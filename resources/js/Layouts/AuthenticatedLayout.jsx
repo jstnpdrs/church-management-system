@@ -50,19 +50,31 @@ export default function Authenticated({ auth, header, children }) {
                                     href={route("dashboard")}
                                     active={false}
                                 >
-                                    Death Certificate
+                                    Death
                                 </NavLink>
                                 <NavLink
                                     href={route("dashboard")}
                                     active={false}
                                 >
-                                    Marriage Certificate
+                                    Marriage
                                 </NavLink>
                                 <NavLink
                                     href={route("dashboard")}
                                     active={false}
                                 >
                                     Pledge
+                                </NavLink>
+                                <NavLink
+                                    href={route("dashboard")}
+                                    active={false}
+                                >
+                                    Report
+                                </NavLink>
+                                <NavLink
+                                    href={route("dashboard")}
+                                    active={false}
+                                >
+                                    Manage Users
                                 </NavLink>
                             </div>
                         </div>
@@ -185,14 +197,14 @@ export default function Authenticated({ auth, header, children }) {
                             href={route("dashboard")}
                             active={false}
                         >
-                            Death Certificate
+                            Death
                         </ResponsiveNavLink>
 
                         <ResponsiveNavLink
                             href={route("dashboard")}
                             active={false}
                         >
-                            Marriage Certificate
+                            Marriage
                         </ResponsiveNavLink>
 
                         <ResponsiveNavLink
@@ -200,6 +212,18 @@ export default function Authenticated({ auth, header, children }) {
                             active={false}
                         >
                             Pledge
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href={route("dashboard")}
+                            active={false}
+                        >
+                            Report
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href={route("dashboard")}
+                            active={false}
+                        >
+                            Manage Users
                         </ResponsiveNavLink>
                     </div>
 
