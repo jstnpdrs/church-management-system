@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('minister')->nullable();
             $table->string('legitimitas');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
