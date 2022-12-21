@@ -198,7 +198,7 @@ export default function Baptism(props) {
         },
         {
             name: "Status",
-            cell: (row) => row["status"],
+            selector: (row) => row["status"],
             sortable: true,
         },
     ];
