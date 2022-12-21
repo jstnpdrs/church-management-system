@@ -5,8 +5,9 @@ import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { Head, Link, useForm } from "@inertiajs/inertia-react";
+import { Inertia } from "@inertiajs/inertia";
 
-export default function Register() {
+export default function Register(props) {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: "",
         email: "",
@@ -16,6 +17,10 @@ export default function Register() {
     });
 
     useEffect(() => {
+        if (props.auth.user.role !== "admin") {
+            Inertia.visit("/");
+        }
+        // console.log(props);
         return () => {
             reset("password", "password_confirmation");
         };

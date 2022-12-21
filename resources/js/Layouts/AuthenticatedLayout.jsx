@@ -64,18 +64,22 @@ export default function Authenticated({ auth, header, children }) {
                                 >
                                     Pledge
                                 </NavLink>
-                                <NavLink
-                                    href={route("dashboard")}
-                                    active={false}
-                                >
-                                    Report
-                                </NavLink>
-                                <NavLink
-                                    href={route("dashboard")}
-                                    active={false}
-                                >
-                                    Manage Users
-                                </NavLink>
+                                {auth?.user?.role === "admin" && (
+                                    <>
+                                        <NavLink
+                                            href={route("dashboard")}
+                                            active={false}
+                                        >
+                                            Report
+                                        </NavLink>
+                                        <NavLink
+                                            href={route("register")}
+                                            active={false}
+                                        >
+                                            Manage Users
+                                        </NavLink>
+                                    </>
+                                )}
                             </div>
                         </div>
 
@@ -213,18 +217,22 @@ export default function Authenticated({ auth, header, children }) {
                         >
                             Pledge
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink
-                            href={route("dashboard")}
-                            active={false}
-                        >
-                            Report
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink
-                            href={route("dashboard")}
-                            active={false}
-                        >
-                            Manage Users
-                        </ResponsiveNavLink>
+                        {auth?.user?.role === "admin" && (
+                            <>
+                                <ResponsiveNavLink
+                                    href={route("dashboard")}
+                                    active={false}
+                                >
+                                    Report
+                                </ResponsiveNavLink>
+                                <ResponsiveNavLink
+                                    href={route("register")}
+                                    active={false}
+                                >
+                                    Manage Users
+                                </ResponsiveNavLink>
+                            </>
+                        )}
                     </div>
 
                     <div className="pt-4 pb-1 border-t border-gray-200">

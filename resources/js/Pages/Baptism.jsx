@@ -29,11 +29,15 @@ export default function Baptism(props) {
         "November",
         "December",
     ];
-    const years = props.baptisms
-        .map((b) => new Date(b["baptism-date"]).getFullYear())
-        .sort(function (a, b) {
-            return b - a;
-        });
+    const years = [
+        ...new Set(
+            props.baptisms
+                .map((b) => new Date(b["baptism-date"]).getFullYear())
+                .sort(function (a, b) {
+                    return b - a;
+                })
+        ),
+    ];
 
     const {
         data: formData,
@@ -169,7 +173,7 @@ export default function Baptism(props) {
         },
         {
             name: "Legitimitas",
-            cell: () => "Legitimate",
+            selector: (row) => row.legitimitas,
             sortable: true,
         },
         // {
@@ -190,6 +194,11 @@ export default function Baptism(props) {
         {
             name: "Date of Baptism",
             selector: (row) => row["baptism-date"],
+            sortable: true,
+        },
+        {
+            name: "Status",
+            cell: (row) => "Pending",
             sortable: true,
         },
     ];
@@ -250,9 +259,9 @@ export default function Baptism(props) {
                                 >
                                     Select Year
                                 </option>
-                                {years?.map((year) => (
+                                {years?.map((year, i) => (
                                     <option
-                                        key={year}
+                                        key={i}
                                         value={year}
                                         className="h-12"
                                     >
@@ -323,7 +332,7 @@ export default function Baptism(props) {
                         /> */}
                         {/* <Link href={route("baptism.create")}> */}
                         <button
-                            onClick={modalOpen}
+                            onClick={() => Inertia.visit("baptism/create")}
                             // onClick={() => Inertia.visit("/baptism")}
                             className="px-4 py-2 text-white bg-slate-700"
                         >
@@ -341,6 +350,8 @@ export default function Baptism(props) {
                             fixedHeader
                             pointerOnHover
                             highlightOnHover
+                            paginationPerPage={20}
+                            paginationRowsPerPageOptions={[20, 30, 40, 50, 100]}
                             // defaultSortAsc={false}
                             onRowClicked={
                                 (row) => Inertia.visit(`baptism/${+row.id}`)
@@ -350,7 +361,7 @@ export default function Baptism(props) {
                     </div>
                 </div>
             </div>
-            <Modal
+            {/* <Modal
                 modalVisible={modalVisible}
                 modalClose={modalClose}
                 fullscreen={false}
@@ -499,7 +510,7 @@ export default function Baptism(props) {
                         </button>
                     </div>
                 </form>
-            </Modal>
+            </Modal> */}
         </AuthenticatedLayout>
     );
 }

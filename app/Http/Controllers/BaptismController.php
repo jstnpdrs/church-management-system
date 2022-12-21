@@ -81,7 +81,11 @@ class BaptismController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Baptism::find($id)->update($request->all());
+        // return inertia('Baptism',[
+        //     'baptisms'=>Baptism::all()
+        // ]);
+        return Redirect::route('baptism.index');
     }
 
     /**

@@ -25,10 +25,8 @@ return new class extends Migration
             $table->longText('sponsors')->nullable();
             $table->date('baptism-date')->nullable();
             $table->string('minister')->nullable();
-            // $table->boolean('legitimitas')->nullable();
-            // $table->foreignId('parents_id');
-            // $table->foreignId('sponsors_id');
-            // $table->foreignId('godparents_id');
+            $table->string('minister')->nullable();
+            $table->string('legitimitas');
             $table->timestamps();
         });
     }
