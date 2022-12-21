@@ -23,8 +23,9 @@ return new class extends Migration
             $table->string('legitimitas')->nullable();
             $table->longText('godparents')->nullable();
             $table->longText('sponsors')->nullable();
-            $table->date('baptism-date')->nullable();
             $table->string('minister')->nullable();
+            $table->date('baptism-date')->nullable();
+            $table->string('status')->default('pending');
             $table->timestamps();
             $table->softDeletes();
         });
