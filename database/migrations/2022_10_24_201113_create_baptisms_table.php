@@ -25,7 +25,6 @@ return new class extends Migration
             $table->longText('sponsors')->nullable();
             $table->date('baptism-date')->nullable();
             $table->string('minister')->nullable();
-            $table->string('minister')->nullable();
             $table->string('legitimitas');
             $table->timestamps();
             $table->softDeletes();
