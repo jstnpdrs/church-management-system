@@ -25,7 +25,7 @@ return new class extends Migration
             $table->longText('sponsors')->nullable();
             $table->string('minister')->nullable();
             $table->date('baptism-date')->nullable();
-            $table->string('status')->default('pending');
+            $table->string('status')->default('Pending');
             $table->timestamps();
             $table->softDeletes();
         });

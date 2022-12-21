@@ -24,6 +24,7 @@ export default function BaptismCreate(props) {
         godparents: "",
         sponsors: "",
         minister: "",
+        status: "Pending",
     });
 
     async function handleSubmit(e) {
@@ -284,6 +285,28 @@ export default function BaptismCreate(props) {
                                                 placeholder="Enter name"
                                                 required
                                             />
+                                        </label>
+                                    </div>
+                                    <div className="mb-3">
+                                        <label
+                                            htmlFor="legitimitas"
+                                            className="w-full"
+                                        >
+                                            Status
+                                            <select
+                                                className="w-full"
+                                                name="status"
+                                                id="status"
+                                                onChange={handleOnchange}
+                                                value={formData.status}
+                                            >
+                                                <option value="Pending">
+                                                    Pending
+                                                </option>
+                                                <option value="Approved">
+                                                    Approved
+                                                </option>
+                                            </select>
                                         </label>
                                     </div>
                                 </div>

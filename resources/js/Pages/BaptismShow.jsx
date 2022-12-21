@@ -23,6 +23,7 @@ export default function BaptismShow(props) {
         godparents: props?.baptism?.godparents || "",
         sponsors: props?.baptism?.sponsors || "",
         minister: props?.baptism?.minister || "",
+        status: props?.baptism?.status || "Pending",
     });
     const [editEnabled, setEditEnabled] = useState(false);
     async function handleSubmit(e) {
@@ -38,6 +39,15 @@ export default function BaptismShow(props) {
                 toast.success("Record updated");
             },
         });
+    }
+    function handleDelete(e) {
+        if (confirm("Are you sure you want to delete this record?")) {
+            Inertia.delete("/baptism/" + props.baptism.id, {
+                onSuccess: (res) => {
+                    toast.success("Record deleted");
+                },
+            });
+        }
     }
     function handleOnchange(e) {
         setFormData((prev) => ({
@@ -88,9 +98,7 @@ export default function BaptismShow(props) {
                                 Edit
                             </button>
                             <button
-                                onClick={() =>
-                                    toast.warning("Under Development")
-                                }
+                                onClick={handleDelete}
                                 className="px-4 py-2 text-white bg-red-700"
                             >
                                 Delete
@@ -339,6 +347,31 @@ export default function BaptismShow(props) {
                                                     editEnabled ? false : true
                                                 }
                                             />
+                                        </label>
+                                    </div>
+                                    <div className="mb-3">
+                                        <label
+                                            htmlFor="legitimitas"
+                                            className="w-full"
+                                        >
+                                            Status
+                                            <select
+                                                className="w-full"
+                                                name="status"
+                                                id="status"
+                                                onChange={handleOnchange}
+                                                value={formData.status}
+                                                disabled={
+                                                    editEnabled ? false : true
+                                                }
+                                            >
+                                                <option value="Pending">
+                                                    Pending
+                                                </option>
+                                                <option value="Approved">
+                                                    Approved
+                                                </option>
+                                            </select>
                                         </label>
                                     </div>
                                 </div>

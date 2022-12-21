@@ -96,6 +96,7 @@ class BaptismController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Baptism::find($id)->delete();
+        return Redirect::route('baptism.index');
     }
 }
