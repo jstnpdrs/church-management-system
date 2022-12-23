@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import React from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import { useForm } from "@inertiajs/inertia-react";
 import { Inertia } from "@inertiajs/inertia";
 import { toast } from "react-toastify";
-import { useForm } from "@inertiajs/inertia-react";
 
-export default function BaptismShow(props) {
+export default function ConfirmationCreate(props) {
     // useEffect(() => {
     //     console.log(props);
     // }, []);
@@ -14,41 +14,27 @@ export default function BaptismShow(props) {
         errors,
         reset,
     } = useForm({
-        name: props?.baptism?.name || "",
-        pob: props?.baptism?.pob || "",
-        dob: props?.baptism?.dob || "",
-        baptism_date: props?.baptism?.baptism_date || "",
-        parents: props?.baptism?.parents || "Mother: " + "\r\n" + "Father: ",
-        legitimitas: props?.baptism?.legitimitas || "",
-        // godparents: props?.baptism?.godparents || "",
-        // sponsors: props?.baptism?.sponsors || "",
-        godparents_sponsors: props?.baptism?.godparents_sponsors || "",
-        minister: props?.baptism?.minister || "",
-        status: props?.baptism?.status || "Pending",
+        name: "",
+        pob: "",
+        dob: "",
+        confirmation_date: "",
+        parents: "Mother: " + "\r\n" + "Father: ",
+        // legitimitas: "",
+        // godparents: "",
+        // sponsors: "",
+        godparents_sponsors: "",
+        minister: "",
+        status: "Pending",
     });
-    const [editEnabled, setEditEnabled] = useState(false);
+
     async function handleSubmit(e) {
         e.preventDefault();
-        Inertia.put("/baptism/" + props.baptism.id, formData, {
+        Inertia.post("/confirmation", formData, {
             onSuccess: (res) => {
-                // setBaptisms(res.props.baptisms);
-                // Inertia.reload({ only: ["baptisms"] });
-                // modalClose();
-                // Inertia.visit("baptism");
-                // reset();
-                // console.log(res.props);
-                toast.success("Record updated");
+                console.log(res);
+                toast.success("Record added");
             },
         });
-    }
-    function handleDelete(e) {
-        if (confirm("Are you sure you want to delete this record?")) {
-            Inertia.delete("/baptism/" + props.baptism.id, {
-                onSuccess: (res) => {
-                    toast.success("Record deleted");
-                },
-            });
-        }
     }
     function handleOnchange(e) {
         setFormData((prev) => ({
@@ -56,10 +42,7 @@ export default function BaptismShow(props) {
             [e.target.name]: e.target.value,
         }));
     }
-    function toggleEdit() {
-        setEditEnabled(true);
-        toast.success("Edit enabled");
-    }
+
     return (
         <AuthenticatedLayout
             auth={props.auth}
@@ -67,7 +50,7 @@ export default function BaptismShow(props) {
             header={
                 <div className="flex items-center justify-between">
                     <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                        Create Baptism
+                        Create Confirmation
                     </h2>
                 </div>
             }
@@ -76,40 +59,16 @@ export default function BaptismShow(props) {
                 <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="flex justify-between w-full my-2">
                         <button
-                            onClick={() => Inertia.visit("/baptism")}
+                            onClick={() => Inertia.visit("/confirmation")}
                             className="px-4 py-2 text-white bg-slate-700"
                         >
                             {"< Back"}
                         </button>
-                        <div className="space-x-2">
-                            <button
-                                onClick={() =>
-                                    toast.warning("Under Development")
-                                }
-                                // onClick={() => Inertia.visit("/baptism")}
-                                className="px-4 py-2 text-white bg-green-700"
-                            >
-                                View Certificate
-                            </button>
-                            <button
-                                onClick={toggleEdit}
-                                // onClick={() => Inertia.visit("/baptism")}
-                                className="px-4 py-2 text-white bg-blue-700"
-                            >
-                                Edit
-                            </button>
-                            <button
-                                onClick={handleDelete}
-                                className="px-4 py-2 text-white bg-red-700"
-                            >
-                                Delete
-                            </button>
-                        </div>
                     </div>
                     <div className="w-full p-4 bg-white">
                         <form
                             onSubmit={handleSubmit}
-                            className="flex flex-col justify-between h-full"
+                            className="flex flex-col justify-between h-full "
                         >
                             <div className="h-full m-5">
                                 <div className="h-full">
@@ -129,9 +88,6 @@ export default function BaptismShow(props) {
                                                 autoComplete="off"
                                                 placeholder="Enter name"
                                                 required
-                                                disabled={
-                                                    editEnabled ? false : true
-                                                }
                                             />
                                         </label>
                                     </div>
@@ -148,9 +104,6 @@ export default function BaptismShow(props) {
                                                 list="brgys"
                                                 placeholder="Enter place of birth"
                                                 required
-                                                disabled={
-                                                    editEnabled ? false : true
-                                                }
                                             />
                                             <datalist id="brgys">
                                                 <option value="Alegria, Buruanga, Aklan">
@@ -213,9 +166,6 @@ export default function BaptismShow(props) {
                                                 autoComplete="off"
                                                 placeholder="Enter date of birth"
                                                 required
-                                                disabled={
-                                                    editEnabled ? false : true
-                                                }
                                             />
                                         </label>
                                     </div>
@@ -234,13 +184,10 @@ export default function BaptismShow(props) {
                                                 rows="2"
                                                 onChange={handleOnchange}
                                                 value={formData.parents}
-                                                disabled={
-                                                    editEnabled ? false : true
-                                                }
                                             ></textarea>
                                         </label>
                                     </div>
-                                    <div className="mb-3">
+                                    {/* <div className="mb-3">
                                         <label
                                             htmlFor="legitimitas"
                                             className="w-full"
@@ -252,9 +199,6 @@ export default function BaptismShow(props) {
                                                 id="legitimitas"
                                                 onChange={handleOnchange}
                                                 value={formData.legitimitas}
-                                                disabled={
-                                                    editEnabled ? false : true
-                                                }
                                             >
                                                 <option value="Legitimate">
                                                     Legitimate
@@ -264,10 +208,10 @@ export default function BaptismShow(props) {
                                                 </option>
                                             </select>
                                         </label>
-                                    </div>
+                                    </div> */}
                                     <div className="mb-3">
                                         <label
-                                            htmlFor="godparents_sponsors"
+                                            htmlFor="_sponsors"
                                             className="w-full"
                                         >
                                             Godparents/Sponsors
@@ -281,9 +225,6 @@ export default function BaptismShow(props) {
                                                 onChange={handleOnchange}
                                                 value={
                                                     formData.godparents_sponsors
-                                                }
-                                                disabled={
-                                                    editEnabled ? false : true
                                                 }
                                             ></textarea>
                                         </label>
@@ -303,30 +244,26 @@ export default function BaptismShow(props) {
                                                 rows="2"
                                                 onChange={handleOnchange}
                                                 value={formData.sponsors}
-                                                disabled={
-                                                    editEnabled ? false : true
-                                                }
                                             ></textarea>
                                         </label>
                                     </div> */}
                                     <div className="mb-3">
                                         <label
-                                            htmlFor="baptism_date"
+                                            htmlFor="confirmation_date"
                                             className="w-full"
                                         >
-                                            Date of Baptism
+                                            Date of Confirmation
                                             <input
                                                 type="date"
-                                                name="baptism_date"
-                                                value={formData.baptism_date}
+                                                name="confirmation_date"
+                                                value={
+                                                    formData.confirmation_date
+                                                }
                                                 className="w-full"
                                                 onChange={handleOnchange}
                                                 autoComplete="off"
                                                 placeholder="Enter date of birth"
                                                 required
-                                                disabled={
-                                                    editEnabled ? false : true
-                                                }
                                             />
                                         </label>
                                     </div>
@@ -346,9 +283,6 @@ export default function BaptismShow(props) {
                                                 autoComplete="off"
                                                 placeholder="Enter name"
                                                 required
-                                                disabled={
-                                                    editEnabled ? false : true
-                                                }
                                             />
                                         </label>
                                     </div>
@@ -364,9 +298,6 @@ export default function BaptismShow(props) {
                                                 id="status"
                                                 onChange={handleOnchange}
                                                 value={formData.status}
-                                                disabled={
-                                                    editEnabled ? false : true
-                                                }
                                             >
                                                 <option value="Pending">
                                                     Pending
@@ -379,23 +310,14 @@ export default function BaptismShow(props) {
                                     </div>
                                 </div>
                             </div>
-                            {editEnabled && (
-                                <div className="flex items-center justify-center w-full space-x-2 rounded-b">
-                                    <button
-                                        type="submit"
-                                        className="w-full p-4 text-white bg-slate-800"
-                                    >
-                                        Update
-                                    </button>
-                                    <button
-                                        onClick={() => setEditEnabled(false)}
-                                        type="submit"
-                                        className="w-full p-4 text-white bg-gray-500"
-                                    >
-                                        Cancel
-                                    </button>
-                                </div>
-                            )}
+                            <div className="flex items-center justify-center w-full space-x-2 border-t border-gray-400 rounded-b">
+                                <button
+                                    type="submit"
+                                    className="w-full p-4 text-white bg-slate-800"
+                                >
+                                    Save
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>

@@ -18,11 +18,12 @@ export default function BaptismCreate(props) {
         name: "",
         pob: "",
         dob: "",
-        "baptism-date": "",
+        baptism_date: "",
         parents: "Mother: " + "\r\n" + "Father: ",
         legitimitas: "",
-        godparents: "",
-        sponsors: "",
+        // godparents: "",
+        // sponsors: "",
+        godparents_sponsors: "",
         minister: "",
         status: "Pending",
     });
@@ -216,23 +217,25 @@ export default function BaptismCreate(props) {
                                     </div>
                                     <div className="mb-3">
                                         <label
-                                            htmlFor="godparents"
+                                            htmlFor="godparents_sponsors"
                                             className="w-full"
                                         >
-                                            Godparents
+                                            Godparents/Sponsors
                                             <textarea
-                                                placeholder="Enter Godparents"
+                                                placeholder="Enter Godparents/Sponsors"
                                                 className="w-full"
-                                                name="godparents"
-                                                id="godparents"
+                                                name="godparents_sponsors"
+                                                id="godparents_sponsors"
                                                 cols="30"
                                                 rows="2"
                                                 onChange={handleOnchange}
-                                                value={formData.godparents}
+                                                value={
+                                                    formData.godparents_sponsors
+                                                }
                                             ></textarea>
                                         </label>
                                     </div>
-                                    <div className="mb-3">
+                                    {/* <div className="mb-3">
                                         <label
                                             htmlFor="sponsors"
                                             className="w-full"
@@ -249,17 +252,17 @@ export default function BaptismCreate(props) {
                                                 value={formData.sponsors}
                                             ></textarea>
                                         </label>
-                                    </div>
+                                    </div> */}
                                     <div className="mb-3">
                                         <label
-                                            htmlFor="baptism-date"
+                                            htmlFor="baptism_date"
                                             className="w-full"
                                         >
                                             Date of Baptism
                                             <input
                                                 type="date"
-                                                name="baptism-date"
-                                                value={formData["baptism-date"]}
+                                                name="baptism_date"
+                                                value={formData.baptism_date}
                                                 className="w-full"
                                                 onChange={handleOnchange}
                                                 autoComplete="off"

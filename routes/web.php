@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BaptismController;
+use App\Http\Controllers\ConfirmationController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Redirect;
@@ -23,13 +24,10 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
    return Redirect::route('baptism.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
+Route::resource('confirmation', ConfirmationController::class)->middleware(['auth', 'verified']);
 Route::resource('baptism', BaptismController::class)->middleware(['auth', 'verified']);
-Route::get('/confirmation', function () {
-    return Inertia::render('Confirmation');
-})->middleware(['auth', 'verified'])->name('confirmation');
 Route::get('/create-user', function () {
     return Inertia::render('Auth/Register');
-    // return Inertia::render('Register');
 })->middleware(['auth', 'verified'])->name('create-user');
 Route::get('/register', [RegisteredUserController::class,'create'])->middleware(['auth', 'verified'])->name('register');
 require __DIR__.'/auth.php';

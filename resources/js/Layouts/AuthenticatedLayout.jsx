@@ -41,8 +41,11 @@ export default function Authenticated({ auth, header, children }) {
                                     Baptism
                                 </NavLink>
                                 <NavLink
-                                    href={route("confirmation")}
-                                    active={route().current("confirmation")}
+                                    href={route("confirmation.index")}
+                                    active={
+                                        route().current("confirmation.index") ||
+                                        route().current("confirmation.show")
+                                    }
                                 >
                                     Confirmation
                                 </NavLink>
@@ -191,8 +194,11 @@ export default function Authenticated({ auth, header, children }) {
                         </ResponsiveNavLink>
 
                         <ResponsiveNavLink
-                            href={route("confirmation")}
-                            active={route().current("confirmation")}
+                            href={route("confirmation.index")}
+                            active={
+                                route().current("confirmation.index") ||
+                                route().current("confirmation.show")
+                            }
                         >
                             Confirmation
                         </ResponsiveNavLink>

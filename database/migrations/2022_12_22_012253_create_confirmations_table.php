@@ -13,21 +13,20 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('baptisms', function (Blueprint $table) {
+        Schema::create('confirmations', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
             $table->date('dob')->nullable();
             $table->string('pob')->nullable();
             $table->longText('parents')->nullable();
-            $table->string('legitimitas')->nullable();
-            // $table->longText('godparents')->nullable();
-            // $table->longText('sponsors')->nullable();
-            $table->string('godparents_sponsors')->nullable();
+            $table->longText('godparents_sponsors')->nullable();
             $table->string('minister')->nullable();
-            $table->date('baptism_date')->nullable();
+            $table->date('confirmation_date')->nullable();
             $table->string('status')->default('Pending');
             $table->timestamps();
             $table->softDeletes();
+            // $table->string('legitimitas')->nullable();
+            // $table->longText('sponsors')->nullable();
         });
     }
 
@@ -38,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('baptisms');
+        Schema::dropIfExists('confirmations');
     }
 };

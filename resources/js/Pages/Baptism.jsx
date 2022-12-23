@@ -32,7 +32,7 @@ export default function Baptism(props) {
     const years = [
         ...new Set(
             props.baptisms
-                .map((b) => new Date(b["baptism-date"]).getFullYear())
+                .map((b) => new Date(b.baptism_date).getFullYear())
                 .sort(function (a, b) {
                     return b - a;
                 })
@@ -48,7 +48,7 @@ export default function Baptism(props) {
         name: "",
         pob: "",
         dob: "",
-        "baptism-date": "",
+        baptism_date: "",
         parents: "Mother: " + "\r\n" + "Father: ",
         godparents: "",
         sponsors: "",
@@ -62,13 +62,13 @@ export default function Baptism(props) {
     //     // new Date(
     //     //     props?.baptisms?.map((b) =>
     //     //         console.log(
-    //     //             new Date(b["baptism-date"]).getFullYear() ===
+    //     //             new Date(b.baptism_date).getFullYear() ===
     //     //                 parseInt(filters.yearFilter)
     //     //         )
     //     //     )
     //     // );
     //     console.log(
-    //         props.baptisms.map((b) => new Date(b["baptism-date"]).getFullYear())
+    //         props.baptisms.map((b) => new Date(b.baptism_date).getFullYear())
     //     );
     // }, [filters]);
     // useEffect(() => {
@@ -86,12 +86,12 @@ export default function Baptism(props) {
     // const filterMethods = [
     //     (item) =>
     //         filters.monthFilter
-    //             ? months[new Date(item["baptism-date"]).getMonth()] ===
+    //             ? months[new Date(item.baptism_date).getMonth()] ===
     //               filters.monthFilter
     //             : false,
     //     (item) =>
     //         filters.yearFilter
-    //             ? new Date(item["baptism-date"]).getFullYear() ===
+    //             ? new Date(item.baptism_date).getFullYear() ===
     //               parseInt(filters.yearFilter)
     //             : false,
 
@@ -103,9 +103,9 @@ export default function Baptism(props) {
     const filteredData = baptisms.filter((baptism) => {
         if (filters.monthFilter && filters.yearFilter) {
             return (
-                months[new Date(baptism["baptism-date"]).getMonth()] ===
+                months[new Date(baptism.baptism_date).getMonth()] ===
                     filters.monthFilter &&
-                new Date(baptism["baptism-date"]).getFullYear() ===
+                new Date(baptism.baptism_date).getFullYear() ===
                     parseInt(filters.yearFilter)
             );
         }
@@ -113,9 +113,9 @@ export default function Baptism(props) {
             return true;
         }
         return (
-            months[new Date(baptism["baptism-date"]).getMonth()] ===
+            months[new Date(baptism.baptism_date).getMonth()] ===
                 filters.monthFilter ||
-            new Date(baptism["baptism-date"]).getFullYear() ===
+            new Date(baptism.baptism_date).getFullYear() ===
                 parseInt(filters.yearFilter)
         );
     });
@@ -124,14 +124,14 @@ export default function Baptism(props) {
     //     // data = filters.monthFilter
     //     //     ? baptisms?.filter(
     //     //           (b) =>
-    //     //               months[new Date(item["baptism-date"]).getMonth()] ===
+    //     //               months[new Date(item.baptism_date).getMonth()] ===
     //     //               filters.monthFilter
     //     //       )
     //     //     : data;
     //     // data = filters.yearFilter
     //     //     ? baptisms?.filter(
     //     //           (b) =>
-    //     //               new Date(item["baptism-date"]).getFullYear() ===
+    //     //               new Date(item.baptism_date).getFullYear() ===
     //     //               parseInt(filters.yearFilter)
     //     //       )
     //     //     : data;
@@ -193,12 +193,12 @@ export default function Baptism(props) {
         },
         {
             name: "Date of Baptism",
-            selector: (row) => row["baptism-date"],
+            selector: (row) => row.baptism_date,
             sortable: true,
         },
         {
             name: "Status",
-            selector: (row) => row["status"],
+            selector: (row) => row.status,
             sortable: true,
         },
     ];
@@ -467,14 +467,14 @@ export default function Baptism(props) {
                             </div>
                             <div className="mb-3">
                                 <label
-                                    htmlFor="baptism-date"
+                                    htmlFor="baptism_date"
                                     className="w-full"
                                 >
                                     Date of Baptism
                                     <input
                                         type="date"
-                                        name="baptism-date"
-                                        value={formData["baptism-date"]}
+                                        name="baptism_date"
+                                        value={formData.baptism_date}
                                         className="w-full"
                                         onChange={handleOnchange}
                                         autoComplete="off"

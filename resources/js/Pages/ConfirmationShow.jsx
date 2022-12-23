@@ -14,27 +14,28 @@ export default function BaptismShow(props) {
         errors,
         reset,
     } = useForm({
-        name: props?.baptism?.name || "",
-        pob: props?.baptism?.pob || "",
-        dob: props?.baptism?.dob || "",
-        baptism_date: props?.baptism?.baptism_date || "",
-        parents: props?.baptism?.parents || "Mother: " + "\r\n" + "Father: ",
-        legitimitas: props?.baptism?.legitimitas || "",
-        // godparents: props?.baptism?.godparents || "",
-        // sponsors: props?.baptism?.sponsors || "",
-        godparents_sponsors: props?.baptism?.godparents_sponsors || "",
-        minister: props?.baptism?.minister || "",
-        status: props?.baptism?.status || "Pending",
+        name: props?.confirmation?.name || "",
+        pob: props?.confirmation?.pob || "",
+        dob: props?.confirmation?.dob || "",
+        confirmation_date: props?.confirmation?.confirmation_date || "",
+        parents:
+            props?.confirmation?.parents || "Mother: " + "\r\n" + "Father: ",
+        // legitimitas: props?.confirmation?.legitimitas || "",
+        // godparents: props?.confirmation?.godparents || "",
+        // sponsors: props?.confirmation?.sponsors || "",
+        godparents_sponsors: props?.confirmation?.godparents_sponsors || "",
+        minister: props?.confirmation?.minister || "",
+        status: props?.confirmation?.status || "Pending",
     });
     const [editEnabled, setEditEnabled] = useState(false);
     async function handleSubmit(e) {
         e.preventDefault();
-        Inertia.put("/baptism/" + props.baptism.id, formData, {
+        Inertia.put("/confirmation/" + props.confirmation.id, formData, {
             onSuccess: (res) => {
-                // setBaptisms(res.props.baptisms);
-                // Inertia.reload({ only: ["baptisms"] });
+                // setBaptisms(res.props.confirmations);
+                // Inertia.reload({ only: ["confirmations"] });
                 // modalClose();
-                // Inertia.visit("baptism");
+                // Inertia.visit("confirmation");
                 // reset();
                 // console.log(res.props);
                 toast.success("Record updated");
@@ -43,7 +44,7 @@ export default function BaptismShow(props) {
     }
     function handleDelete(e) {
         if (confirm("Are you sure you want to delete this record?")) {
-            Inertia.delete("/baptism/" + props.baptism.id, {
+            Inertia.delete("/confirmation/" + props.confirmation.id, {
                 onSuccess: (res) => {
                     toast.success("Record deleted");
                 },
@@ -67,7 +68,7 @@ export default function BaptismShow(props) {
             header={
                 <div className="flex items-center justify-between">
                     <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                        Create Baptism
+                        Create Confirmation
                     </h2>
                 </div>
             }
@@ -76,7 +77,7 @@ export default function BaptismShow(props) {
                 <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="flex justify-between w-full my-2">
                         <button
-                            onClick={() => Inertia.visit("/baptism")}
+                            onClick={() => Inertia.visit("/confirmation")}
                             className="px-4 py-2 text-white bg-slate-700"
                         >
                             {"< Back"}
@@ -86,14 +87,14 @@ export default function BaptismShow(props) {
                                 onClick={() =>
                                     toast.warning("Under Development")
                                 }
-                                // onClick={() => Inertia.visit("/baptism")}
+                                // onClick={() => Inertia.visit("/confirmation")}
                                 className="px-4 py-2 text-white bg-green-700"
                             >
                                 View Certificate
                             </button>
                             <button
                                 onClick={toggleEdit}
-                                // onClick={() => Inertia.visit("/baptism")}
+                                // onClick={() => Inertia.visit("/confirmation")}
                                 className="px-4 py-2 text-white bg-blue-700"
                             >
                                 Edit
@@ -240,7 +241,7 @@ export default function BaptismShow(props) {
                                             ></textarea>
                                         </label>
                                     </div>
-                                    <div className="mb-3">
+                                    {/* <div className="mb-3">
                                         <label
                                             htmlFor="legitimitas"
                                             className="w-full"
@@ -264,7 +265,7 @@ export default function BaptismShow(props) {
                                                 </option>
                                             </select>
                                         </label>
-                                    </div>
+                                    </div> */}
                                     <div className="mb-3">
                                         <label
                                             htmlFor="godparents_sponsors"
@@ -311,14 +312,16 @@ export default function BaptismShow(props) {
                                     </div> */}
                                     <div className="mb-3">
                                         <label
-                                            htmlFor="baptism_date"
+                                            htmlFor="confirmation_date"
                                             className="w-full"
                                         >
-                                            Date of Baptism
+                                            Date of Confirmation
                                             <input
                                                 type="date"
-                                                name="baptism_date"
-                                                value={formData.baptism_date}
+                                                name="confirmation_date"
+                                                value={
+                                                    formData.confirmation_date
+                                                }
                                                 className="w-full"
                                                 onChange={handleOnchange}
                                                 autoComplete="off"
