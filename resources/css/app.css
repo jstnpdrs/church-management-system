@@ -5,3 +5,24 @@
 select.sc-cwSeag.jaZsat {
     background-image: none !important;
 }
+
+.dataTables_wrapper select {
+    padding: 0 25px 0 5px !important;
+    font-size: 12px;
+}
+.dataTables_wrapper label {
+    font-size: 12px;
+}
+.dataTables_wrapper input {
+    font-size: 12px;
+    padding: 0 5px 0 5px !important;
+}
+.dataTables_info {
+    font-size: 11px;
+}
+.dataTables_paginate {
+    font-size: 12px;
+}
+.dt-buttons {
+    display: contents;
+}

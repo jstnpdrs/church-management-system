@@ -1,10 +1,39 @@
 import { useEffect, useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/inertia-react";
-import DataTable from "react-data-table-component";
+// import DataTable from "react-data-table-component";
 import { Inertia } from "@inertiajs/inertia";
-
+// import "https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.css";
+// import "https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.js";
+// import "datatables.net-dt";
+// import jQuery from "jquery";
 export default function Confirmation(props) {
+    // const $ = jQuery;
+    useEffect(() => {
+        const table = $("#confirmationTable").DataTable({
+            stateSave: true,
+            colReorder: true,
+            lengthMenu: [
+                [10, 25, 50, 100, -1],
+                [10, 25, 50, 100, "All"],
+            ],
+            responsive: {
+                details: false,
+            },
+            // scrollX: true,
+            // autoWidth: true,
+            info: true,
+            // pageLength: 5,
+            columnDefs: [
+                { responsivePriority: 1, targets: 0 },
+                { responsivePriority: 2, targets: -1 },
+            ],
+            dom: "Bfrtip",
+            // buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+            buttons: ["pageLength", "colvis", "pdf", "print"],
+        });
+    }, []);
+
     const months = [
         "January",
         "February",
@@ -125,18 +154,15 @@ export default function Confirmation(props) {
                 </h2>
             }
         >
+            {/* <div className="p-5">
+
+            </div> */}
             <Head title="Confirmation" />
 
             <div className="py-12">
                 <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <div className="flex justify-between w-full my-2">
-                        {/* <input
-                            type="text"
-                            name="yearFilter"
-                            id="yearFilter"
-                            onChange={(e) => console.log(e.target.value)}
-                            defaultValue={"2022-10"}
-                        /> */}
+                    {/* <div className="flex justify-between w-full my-2">
+
                         <div className="space-x-2">
                             <select
                                 name="yearFilter"
@@ -160,41 +186,6 @@ export default function Confirmation(props) {
                                         {year}
                                     </option>
                                 ))}
-                                {/* <option
-                                    key="default"
-                                    value=""
-                                    className="p-5 m-4"
-                                >
-                                    Select Year
-                                </option>
-                                <option
-                                    key="2022"
-                                    value="2022"
-                                    className="h-12"
-                                >
-                                    2022
-                                </option>
-                                <option
-                                    key="2021"
-                                    value="2021"
-                                    className="h-12"
-                                >
-                                    2021
-                                </option>
-                                <option
-                                    key="2020"
-                                    value="2020"
-                                    className="h-12"
-                                >
-                                    2020
-                                </option>
-                                <option
-                                    key="2019"
-                                    value="2019"
-                                    className="h-12"
-                                >
-                                    2019
-                                </option> */}
                             </select>
                             <select
                                 name="monthFilter"
@@ -221,9 +212,9 @@ export default function Confirmation(props) {
                         >
                             + Add
                         </button>
-                    </div>
+                    </div> */}
                     <div className="w-full p-4 bg-white">
-                        <DataTable
+                        {/* <DataTable
                             title="Register of Confirmation"
                             columns={columns}
                             data={filteredData || props?.confirmations}
@@ -240,7 +231,64 @@ export default function Confirmation(props) {
                                     Inertia.visit(`confirmation/${+row.id}`)
                                 // toast.success(row.name + " clicked!")
                             }
-                        />
+                        /> */}
+                        <div className="flex items-center justify-between pb-5">
+                            <h1 className="text-2xl">
+                                Register of Confirmation
+                            </h1>
+                            <button
+                                onClick={() =>
+                                    Inertia.visit("confirmation/create")
+                                }
+                                className="px-4 py-2 text-white bg-slate-700"
+                            >
+                                + Add
+                            </button>
+                        </div>
+                        <table id="confirmationTable" className="text-xs">
+                            <thead className="text-[11px]">
+                                <tr>
+                                    <th>no</th>
+                                    <th>name</th>
+                                    <th>bd</th>
+                                    <th>pob</th>
+                                    <th>parents</th>
+                                    <th>minister</th>
+                                    <th data-priority="1">doc</th>
+                                    <th data-priority="1">status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {props?.confirmations?.map((c, i) => {
+                                    return (
+                                        <tr
+                                            key={i}
+                                            className="hover:cursor-pointer hover:bg-slate-200 even:bg-slate-100"
+                                            onClick={() =>
+                                                Inertia.visit(
+                                                    `confirmation/${c.id}`
+                                                )
+                                            }
+                                        >
+                                            <td>{c.id}</td>
+                                            <td>{c.name}</td>
+                                            <td>
+                                                {new Date(c.dob).toDateString()}
+                                            </td>
+                                            <td>{c.pob}</td>
+                                            <td>{c.parents}</td>
+                                            <td>{c.minister}</td>
+                                            <td>
+                                                {new Date(
+                                                    c.confirmation_date
+                                                ).toDateString()}
+                                            </td>
+                                            <td>{c.status}</td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
