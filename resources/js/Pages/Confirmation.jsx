@@ -263,7 +263,7 @@ export default function Confirmation(props) {
                                     return (
                                         <tr
                                             key={i}
-                                            className="hover:cursor-pointer hover:bg-slate-200 even:bg-slate-100"
+                                            className="hover:cursor-pointer hover:bg-slate-200 even:bg-slate-50"
                                             onClick={() =>
                                                 Inertia.visit(
                                                     `confirmation/${c.id}`
