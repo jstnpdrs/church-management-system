@@ -3,6 +3,7 @@
 use App\Http\Controllers\BaptismController;
 use App\Http\Controllers\ConfirmationController;
 use App\Http\Controllers\DeathController;
+use App\Http\Controllers\PledgeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Redirect;
@@ -28,6 +29,7 @@ Route::get('/dashboard', function () {
 Route::resource('baptism', BaptismController::class)->middleware(['auth', 'verified']);
 Route::resource('confirmation', ConfirmationController::class)->middleware(['auth', 'verified']);
 Route::resource('death', DeathController::class)->middleware(['auth', 'verified']);
+Route::resource('pledge', PledgeController::class)->middleware(['auth', 'verified']);
 Route::get('/create-user', function () {
     return Inertia::render('Auth/Register');
 })->middleware(['auth', 'verified'])->name('create-user');

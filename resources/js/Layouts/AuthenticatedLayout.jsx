@@ -65,8 +65,11 @@ export default function Authenticated({ auth, header, children }) {
                                     Marriage
                                 </NavLink>
                                 <NavLink
-                                    href={route("dashboard")}
-                                    active={false}
+                                    href={route("pledge.index")}
+                                    active={
+                                        route().current("pledge.index") ||
+                                        route().current("pledge.show")
+                                    }
                                 >
                                     Pledge
                                 </NavLink>
@@ -224,8 +227,11 @@ export default function Authenticated({ auth, header, children }) {
                         </ResponsiveNavLink>
 
                         <ResponsiveNavLink
-                            href={route("dashboard")}
-                            active={false}
+                            href={route("pledge.index")}
+                            active={
+                                route().current("pledge.index") ||
+                                route().current("pledge.show")
+                            }
                         >
                             Pledge
                         </ResponsiveNavLink>
