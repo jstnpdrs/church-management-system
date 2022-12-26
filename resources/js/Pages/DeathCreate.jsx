@@ -185,7 +185,6 @@ export default function DeathCreate(props) {
                                                 value={formData.age}
                                                 className="w-full"
                                                 onChange={handleOnchange}
-                                                autoFocus
                                                 autoComplete="off"
                                                 placeholder="Enter age"
                                                 required
