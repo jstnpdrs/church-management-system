@@ -286,28 +286,30 @@ export default function ConfirmationCreate(props) {
                                             />
                                         </label>
                                     </div>
-                                    <div className="mb-3">
-                                        <label
-                                            htmlFor="legitimitas"
-                                            className="w-full"
-                                        >
-                                            Status
-                                            <select
+                                    {props?.auth?.user?.role != "staff" && (
+                                        <div className="mb-3">
+                                            <label
+                                                htmlFor="legitimitas"
                                                 className="w-full"
-                                                name="status"
-                                                id="status"
-                                                onChange={handleOnchange}
-                                                value={formData.status}
                                             >
-                                                <option value="Pending">
-                                                    Pending
-                                                </option>
-                                                <option value="Approved">
-                                                    Approved
-                                                </option>
-                                            </select>
-                                        </label>
-                                    </div>
+                                                Status
+                                                <select
+                                                    className="w-full"
+                                                    name="status"
+                                                    id="status"
+                                                    onChange={handleOnchange}
+                                                    value={formData.status}
+                                                >
+                                                    <option value="Pending">
+                                                        Pending
+                                                    </option>
+                                                    <option value="Approved">
+                                                        Approved
+                                                    </option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                             <div className="flex items-center justify-center w-full space-x-2 border-t border-gray-400 rounded-b">

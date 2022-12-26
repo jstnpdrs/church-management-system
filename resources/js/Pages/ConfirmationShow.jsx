@@ -355,31 +355,35 @@ export default function BaptismShow(props) {
                                             />
                                         </label>
                                     </div>
-                                    <div className="mb-3">
-                                        <label
-                                            htmlFor="legitimitas"
-                                            className="w-full"
-                                        >
-                                            Status
-                                            <select
+                                    {props?.auth?.user?.role != "staff" && (
+                                        <div className="mb-3">
+                                            <label
+                                                htmlFor="legitimitas"
                                                 className="w-full"
-                                                name="status"
-                                                id="status"
-                                                onChange={handleOnchange}
-                                                value={formData.status}
-                                                disabled={
-                                                    editEnabled ? false : true
-                                                }
                                             >
-                                                <option value="Pending">
-                                                    Pending
-                                                </option>
-                                                <option value="Approved">
-                                                    Approved
-                                                </option>
-                                            </select>
-                                        </label>
-                                    </div>
+                                                Status
+                                                <select
+                                                    className="w-full"
+                                                    name="status"
+                                                    id="status"
+                                                    onChange={handleOnchange}
+                                                    value={formData.status}
+                                                    disabled={
+                                                        editEnabled
+                                                            ? false
+                                                            : true
+                                                    }
+                                                >
+                                                    <option value="Pending">
+                                                        Pending
+                                                    </option>
+                                                    <option value="Approved">
+                                                        Approved
+                                                    </option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                             {editEnabled && (
