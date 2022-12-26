@@ -248,14 +248,16 @@ export default function Confirmation(props) {
                         <table id="confirmationTable" className="text-xs">
                             <thead className="text-[11px]">
                                 <tr>
-                                    <th>no</th>
-                                    <th>name</th>
-                                    <th>bd</th>
-                                    <th>pob</th>
-                                    <th>parents</th>
-                                    <th>minister</th>
-                                    <th data-priority="1">doc</th>
-                                    <th data-priority="1">status</th>
+                                    <th>No.</th>
+                                    <th>Name</th>
+                                    <th>Birthday</th>
+                                    <th>Place of Birth</th>
+                                    <th>Parents</th>
+                                    <th>Minister</th>
+                                    <th data-priority="1">
+                                        Date of Confirmation
+                                    </th>
+                                    <th data-priority="1">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
