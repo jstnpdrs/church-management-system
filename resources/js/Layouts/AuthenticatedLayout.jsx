@@ -75,12 +75,12 @@ export default function Authenticated({ auth, header, children }) {
                                 </NavLink>
                                 {auth?.user?.role === "admin" && (
                                     <>
-                                        <NavLink
+                                        {/* <NavLink
                                             href={route("dashboard")}
                                             active={false}
                                         >
                                             Report
-                                        </NavLink>
+                                        </NavLink> */}
                                         <NavLink
                                             href={route("register")}
                                             active={false}
@@ -237,12 +237,12 @@ export default function Authenticated({ auth, header, children }) {
                         </ResponsiveNavLink>
                         {auth?.user?.role === "admin" && (
                             <>
-                                <ResponsiveNavLink
+                                {/* <ResponsiveNavLink
                                     href={route("dashboard")}
                                     active={false}
                                 >
                                     Report
-                                </ResponsiveNavLink>
+                                </ResponsiveNavLink> */}
                                 <ResponsiveNavLink
                                     href={route("register")}
                                     active={false}
