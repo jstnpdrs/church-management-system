@@ -22,7 +22,7 @@ export default function Baptism(props) {
             ],
             dom: "Bfrtip",
             // buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
-            buttons: ["pageLength", "colvis", "pdf", "print"],
+            buttons: ["pageLength", "colvis", "excel", "print"],
         });
     }, []);
 
