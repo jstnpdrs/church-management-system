@@ -50,8 +50,11 @@ export default function Authenticated({ auth, header, children }) {
                                     Confirmation
                                 </NavLink>
                                 <NavLink
-                                    href={route("dashboard")}
-                                    active={false}
+                                    href={route("death.index")}
+                                    active={
+                                        route().current("death.index") ||
+                                        route().current("death.show")
+                                    }
                                 >
                                     Death
                                 </NavLink>
@@ -204,8 +207,11 @@ export default function Authenticated({ auth, header, children }) {
                         </ResponsiveNavLink>
 
                         <ResponsiveNavLink
-                            href={route("dashboard")}
-                            active={false}
+                            href={route("death.index")}
+                            active={
+                                route().current("death.index") ||
+                                route().current("death.show")
+                            }
                         >
                             Death
                         </ResponsiveNavLink>
