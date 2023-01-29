@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MarriageController;
 use App\Http\Controllers\BaptismController;
 use App\Http\Controllers\ConfirmationController;
 use App\Http\Controllers\DeathController;
@@ -30,6 +31,7 @@ Route::resource('baptism', BaptismController::class)->middleware(['auth', 'verif
 Route::resource('confirmation', ConfirmationController::class)->middleware(['auth', 'verified']);
 Route::resource('death', DeathController::class)->middleware(['auth', 'verified']);
 Route::resource('pledge', PledgeController::class)->middleware(['auth', 'verified']);
+Route::resource('marriage', MarriageController::class)->middleware(['auth', 'verified']);
 Route::get('/create-user', function () {
     return Inertia::render('Auth/Register');
 })->middleware(['auth', 'verified'])->name('create-user');

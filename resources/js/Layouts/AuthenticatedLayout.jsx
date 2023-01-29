@@ -59,8 +59,11 @@ export default function Authenticated({ auth, header, children }) {
                                     Death
                                 </NavLink>
                                 <NavLink
-                                    href={route("dashboard")}
-                                    active={false}
+                                    href={route("marriage.index")}
+                                    active={
+                                        route().current("marriage.index") ||
+                                        route().current("marriage.show")
+                                    }
                                 >
                                     Marriage
                                 </NavLink>
@@ -220,8 +223,11 @@ export default function Authenticated({ auth, header, children }) {
                         </ResponsiveNavLink>
 
                         <ResponsiveNavLink
-                            href={route("dashboard")}
-                            active={false}
+                            href={route("marriage.index")}
+                            active={
+                                route().current("marriage.index") ||
+                                route().current("marriage.show")
+                            }
                         >
                             Marriage
                         </ResponsiveNavLink>
